@@ -13,6 +13,8 @@
             --palha: #f4f1ea;
             --texto: #333333;
             --branco: #ffffff;
+            --correto: #2e7d32;
+            --errado: #c62828;
         }
 
         * {
@@ -123,16 +125,17 @@
             margin-bottom: 1rem;
         }
 
-        /* Simulador Interativo */
-        .simulador-box {
+        /* Simulador Interativo e Quiz */
+        .box-interativa {
             background-color: var(--verde-escuro);
             color: var(--branco);
             padding: 2.5rem;
             border-radius: 12px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            margin-bottom: 3rem;
         }
 
-        .simulador-box p {
+        .box-interativa p {
             margin-bottom: 1.5rem;
         }
 
@@ -188,6 +191,64 @@
             color: #ffd700;
         }
 
+        /* Estrutura do Quiz */
+        .quiz-container {
+            background-color: var(--branco);
+            color: var(--texto);
+            padding: 2rem;
+            border-radius: 8px;
+            margin-top: 1rem;
+        }
+
+        .quiz-pergunta {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 1.5rem;
+            color: var(--marrom);
+        }
+
+        .quiz-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .opcao-btn {
+            background-color: var(--palha);
+            color: var(--texto);
+            border: 1px solid #ccc;
+            padding: 1rem;
+            text-align: left;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.2s;
+        }
+
+        .opcao-btn:hover {
+            background-color: #e2ded5;
+        }
+
+        .opcao-btn.correta {
+            background-color: #c8e6c9 !important;
+            border-color: var(--correto);
+            color: var(--correto);
+            font-weight: bold;
+        }
+
+        .opcao-btn.errada {
+            background-color: #ffcdd2 !important;
+            border-color: var(--errado);
+            color: var(--errado);
+        }
+
+        .quiz-feedback {
+            margin-top: 1.5rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            display: none;
+        }
+
         /* Rodapé */
         footer {
             background-color: var(--marrom);
@@ -215,22 +276,27 @@
 </head>
 <body>
 
+    <!-- Header -->
     <header>
         <h1>EcoCafé Agroflorestal</h1>
         <nav>
             <a href="#conceito">Conceito</a>
             <a href="#beneficios">Benefícios</a>
             <a href="#simulador">Simulador</a>
+            <a href="#quiz">Quiz</a>
         </nav>
     </header>
 
+    <!-- Hero Section -->
     <section class="hero">
         <h2>Café Sombreado & Sustentável</h2>
-        <p>Transformando monoculturas de café em ecossistemas vivos e resilientes através do consórcio com árvores nativas da Mata Atlântica e Cerrado.</p>
+        <p>Transformando monoculturas de café em ecossistemas vivos e resilientes através do consórcio com árvores nativas.</p>
     </section>
 
+    <!-- Conteúdo Principal -->
     <main>
         
+        <!-- Seção Conceito -->
         <section id="conceito">
             <h2 class="section-title">O que é o Consórcio de Café com Nativas?</h2>
             <div style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 2rem;">
@@ -239,6 +305,7 @@
             </div>
         </section>
 
+        <!-- Seção Benefícios -->
         <section id="beneficios">
             <h2 class="section-title">Benefícios para a sua Propriedade</h2>
             <div class="grid-beneficios">
@@ -261,9 +328,10 @@
             </div>
         </section>
 
+        <!-- Seção Simulador -->
         <section id="simulador">
             <h2 class="section-title">Simulador de Impacto Ecológico</h2>
-            <div class="simulador-box">
+            <div class="box-interativa">
                 <p>Clique nos botões abaixo para simular a introdução de árvores nativas na sua lavoura de café e veja a sua pontuação de sustentabilidade subir!</p>
                 
                 <div class="controles">
@@ -282,28 +350,57 @@
             </div>
         </section>
 
+        <!-- NOVA SEÇÃO: QUIZ DE CURIOSIDADES -->
+        <section id="quiz">
+            <h2 class="section-title">Quiz: Você é um Mestre do Café?</h2>
+            <div class="box-interativa" style="background-color: var(--marrom);">
+                <p>Descubra fatos surpreendentes sobre o café e como a ecologia muda o sabor da sua xícara!</p>
+                
+                <div class="quiz-container">
+                    <div id="quiz-tela-inicial">
+                        <h3 style="margin-bottom:1rem; color:var(--marrom);">Preparado para testar seus conhecimentos?</h3>
+                        <button class="btn" onclick="iniciarQuiz()">Começar Quiz ☕</button>
+                    </div>
+
+                    <div id="quiz-jogo" style="display:none;">
+                        <div class="quiz-pergunta" id="pergunta-texto">Aqui vai a pergunta?</div>
+                        <div class="quiz-opcoes" id="opcoes-container">
+                            <!-- Os botões de opções serão gerados dinamicamente via JS -->
+                        </div>
+                        <div class="quiz-feedback" id="feedback-texto"></div>
+                        <button class="btn" id="btn-proxima" onclick="proximaPergunta()" style="margin-top:1.5rem; display:none;">Próxima Pergunta ➡️</button>
+                    </div>
+
+                    <div id="quiz-resultado" style="display:none; text-align:center;">
+                        <h3 style="color:var(--verde-escuro); font-size:1.8rem; margin-bottom:1rem;">Quiz Concluído!</h3>
+                        <p id="placar-final" style="font-size:1.2rem; margin-bottom:1.5rem; color:var(--texto);">Você acertou 0 de 3 perguntas.</p>
+                        <button class="btn" onclick="reiniciarQuiz()">Jogar Novamente 🔄</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
     </main>
 
+    <!-- Rodapé -->
     <footer>
         <p>&copy; 2026 - Cultivo Sustentável de Café & Sistemas Agroflorestais. Desenvolvido para um futuro verde.</p>
     </footer>
 
+    <!-- --- CÓDIGO JAVASCRIPT --- -->
     <script>
+        // --- CÓDIGO DO SIMULADOR ---
         let contagemArvores = 0;
         let listaArvores = [];
 
         function adicionarArvore(nomeArvore) {
             contagemArvores++;
             listaArvores.push(nomeArvore);
-            
-            // Atualiza o HTML com as informações
             document.getElementById('qtd-arvores').innerText = contagemArvores;
             
-            // Lógica de cálculo de sustentabilidade e qualidade do café
             let porcentagemSustentavel = Math.min(contagemArvores * 10, 100);
-            let notaCafe = Math.min(75 + (contagemArvores * 1.5), 88); // Limita em 88 pontos SCA
+            let notaCafe = Math.min(75 + (contagemArvores * 1.5), 88);
             
-            // Altera o texto de status baseado nos números
             let statusTexto = "";
             if (porcentagemSustentavel < 30) {
                 statusTexto = `Transição Inicial (${porcentagemSustentavel}%)`;
@@ -313,14 +410,8 @@
                 statusTexto = `Ecossistema Sustentável Altamente Resiliente 🎉 (${porcentagemSustentavel}%)`;
             }
 
-            let tipoCafe = "";
-            if(notaCafe >= 80) {
-                tipoCafe = ` (${notaCafe.toFixed(1)} Pts - Café Especial!)`;
-            } else {
-                tipoCafe = ` (${notaCafe.toFixed(1)} Pts - Café Comercial)`;
-            }
+            let tipoCafe = notaCafe >= 80 ? ` (${notaCafe.toFixed(1)} Pts - Café Especial!)` : ` (${notaCafe.toFixed(1)} Pts - Café Comercial)`;
 
-            // Renderiza na tela
             document.getElementById('status-area').innerText = statusTexto;
             document.getElementById('pontos-cafe').innerText = tipoCafe;
             document.getElementById('historico').innerText = `Última árvore plantada: ${nomeArvore}. O solo agradece!`;
@@ -334,6 +425,126 @@
             document.getElementById('pontos-cafe').innerText = "75 pontos (Café Comercial)";
             document.getElementById('historico').innerText = "Nenhuma árvore plantada ainda. Sua lavoura está exposta ao sol e pragas.";
         }
+
+        // --- CÓDIGO DO QUIZ DE CURIOSIDADES ---
+        const perguntasQuiz = [
+            {
+                pergunta: "1. Qual é a segunda mercadoria mais comercializada do mundo, ficando atrás apenas do petróleo?",
+                opcoes: ["O Ouro", "O Café", "A Soja", "O Trigo"],
+                correta: 1,
+                curiosidade: "Exatamente! O café movimenta bilhões de dólares e é a segunda commodity mais trocada do planeta."
+            },
+            {
+                pergunta: "2. Por que o café plantado à sombra de árvores nativas costuma ser mais doce e saboroso?",
+                opcoes: [
+                    "Porque as árvores soltam açúcar no solo", 
+                    "Porque os frutos demoram mais para amadurecer, concentrando os açúcares naturais", 
+                    "Porque atrai mais poeira doce do ar", 
+                    "Não há diferença no sabor"
+                ],
+                correta: 1,
+                curiosidade: "Correto! À sombra, a maturação é lenta e uniforme, permitindo que o grão absorva e desenvolva compostos complexos e muito mais doçura."
+            },
+            {
+                pergunta: "3. Qual árvore nativa é excelente para o consórcio com o café por conseguir capturar nitrogênio do ar e fertilizar o solo?",
+                opcoes: ["Pinheiro", "Eucalipto", "Ingá", "Palmeira"],
+                correta: 2,
+                curiosidade: "Isso mesmo! O Ingá é uma leguminosa que faz fixação biológica de nitrogênio, funcionando como um adubo vivo e gratuito para o cafezal."
+            }
+        ];
+
+        let perguntaAtualIndex = 0;
+        let acertos = 0;
+        let respondeu = false;
+
+        function iniciarQuiz() {
+            document.getElementById('quiz-tela-inicial').style.display = 'none';
+            document.getElementById('quiz-resultado').style.display = 'none';
+            document.getElementById('quiz-jogo').style.display = 'block';
+            perguntaAtualIndex = 0;
+            acertos = 0;
+            carregarPergunta();
+        }
+
+        function carregarPergunta() {
+            respondeu = false;
+            document.getElementById('btn-proxima').style.display = 'none';
+            document.getElementById('feedback-texto').style.display = 'none';
+            
+            const dadosPergunta = perguntasQuiz[perguntaAtualIndex];
+            document.getElementById('pergunta-texto').innerText = dadosPergunta.pergunta;
+            
+            const containerOpcoes = document.getElementById('opcoes-container');
+            containerOpcoes.innerHTML = '';
+            
+            dadosPergunta.opcoes.forEach((opcao, index) => {
+                const botao = document.createElement('button');
+                botao.className = 'opcao-btn';
+                botao.innerText = opcao;
+                botao.onclick = () => verificarResposta(index, botao);
+                containerOpcoes.appendChild(botao);
+            });
+        }
+
+        function verificarResposta(indiceSelecionado, botaoClicado) {
+            if (respondeu) return; // Impede clicar em mais de uma
+            respondeu = true;
+            
+            const dadosPergunta = perguntasQuiz[perguntaAtualIndex];
+            const botoes = document.querySelectorAll('.opcao-btn');
+            
+            if (indiceSelecionado === dadosPergunta.correta) {
+                botaoClicado.classList.add('correta');
+                acertos++;
+                mostrarFeedback(true, dadosPergunta.curiosidade);
+            } else {
+                botaoClicado.classList.add('errada');
+                botoes[dadosPergunta.correta].classList.add('correta'); // Mostra a certa
+                mostrarFeedback(false, dadosPergunta.curiosidade);
+            }
+            
+            document.getElementById('btn-proxima').style.display = 'block';
+        }
+
+        function mostrarFeedback(foiCorreto, textoCuriosidade) {
+            const elementoFeedback = document.getElementById('feedback-texto');
+            elementoFeedback.style.display = 'block';
+            if (foiCorreto) {
+                elementoFeedback.innerHTML = `<span style="color:var(--correto);">✓ Boa!</span><br><small style="font-weight:normal; color:#555;">${textoCuriosidade}</small>`;
+            } else {
+                elementoFeedback.innerHTML = `<span style="color:var(--errado);">❌ Quase lá...</span><br><small style="font-weight:normal; color:#555;">${textoCuriosidade}</small>`;
+            }
+        }
+
+        function proximaPergunta() {
+            perguntaAtualIndex++;
+            if (perguntaAtualIndex < perguntasQuiz.length) {
+                carregarPergunta();
+            } else {
+                mostrarResultadoFinal();
+            }
+        }
+
+        function mostrarResultadoFinal() {
+            document.getElementById('quiz-jogo').style.display = 'none';
+            document.getElementById('quiz-resultado').style.display = 'block';
+            
+            let mensagemPlacar = `Você acertou ${acertos} de ${perguntasQuiz.length} perguntas. `;
+            if(acertos === perguntasQuiz.length) {
+                mensagemPlacar += "🏆 Impressionante! Você é um verdadeiro especialista em café ecológico!";
+            } else if (acertos > 1) {
+                mensagemPlacar += "🌱 Muito bom! Seus conhecimentos estão ajudando o planeta.";
+            } else {
+                mensagemPlacar += "☕ Vale a pena ler um pouco mais sobre agroflorestas para turbinar suas respostas.";
+            }
+            
+            document.getElementById('placar-final').innerText = mensagemPlacar;
+        }
+
+        function reiniciarQuiz() {
+            iniciarQuiz();
+        }
     </script>
 </body>
 </html>
+        
