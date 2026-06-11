@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Café Sustentável: O Futuro com Consórcio de Nativas</title>
+    <style>
+        /* --- ESTILOS CSS --- */
+        :root {
+            --verde-escuro: #2c4a3e;
+            --verde-claro: #8da189;
+            --marrom: #4a3525;
+            --palha: #f4f1ea;
+            --texto: #333333;
+            --branco: #ffffff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--palha);
+            color: var(--texto);
+            line-height: 1.6;
+        }
+
+        /* Header e Navegação */
+        header {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            padding: 1rem 2rem;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        header h1 {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+
+        nav a {
+            color: var(--branco);
+            text-decoration: none;
+            margin-left: 1.5rem;
+            transition: color 0.3s;
+        }
+
+        nav a:hover {
+            color: var(--verde-claro);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(rgba(44, 74, 62, 0.7), rgba(74, 53, 37, 0.7)), url('https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?ixlib=rb-4.0.3') no-repeat center center/cover;
+            height: 60vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--branco);
+            padding: 2rem;
+            margin-top: 60px;
+        }
+
+        .hero h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+        }
+
+        /* Conteúdo Principal */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .section-title {
+            text-align: center;
+            color: var(--verde-escuro);
+            margin: 3rem 0 1.5rem 0;
+            font-size: 2rem;
+        }
+
+        /* Grid de Benefícios */
+        .grid-beneficios {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .card {
+            background-color: var(--branco);
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            border-top: 5px solid var(--verde-escuro);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h3 {
+            color: var(--marrom);
+            margin-bottom: 1rem;
+        }
+
+        /* Simulador Interativo */
+        .simulador-box {
+            background-color: var(--verde-escuro);
+            color: var(--branco);
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+        }
+
+        .simulador-box p {
+            margin-bottom: 1.5rem;
+        }
+
+        .controles {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            background-color: var(--verde-claro);
+            color: var(--verde-escuro);
+            border: none;
+            padding: 0.8rem 1.5rem;
+            font-size: 1rem;
+            font-weight: bold;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: var(--branco);
+            color: var(--verde-escuro);
+        }
+
+        .btn-reset {
+            background-color: transparent;
+            color: var(--branco);
+            border: 1px solid var(--branco);
+        }
+
+        .btn-reset:hover {
+            background-color: rgba(255,255,255,0.1);
+            color: var(--branco);
+        }
+
+        .resultado-painel {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 5px solid var(--verde-claro);
+        }
+
+        .resultado-line {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .resultado-line span {
+            font-weight: bold;
+            color: #ffd700;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--marrom);
+            color: var(--branco);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+            font-size: 0.9rem;
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            nav a {
+                margin: 0 0.7rem;
+            }
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>EcoCafé Agroflorestal</h1>
+        <nav>
+            <a href="#conceito">Conceito</a>
+            <a href="#beneficios">Benefícios</a>
+            <a href="#simulador">Simulador</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Café Sombreado & Sustentável</h2>
+        <p>Transformando monoculturas de café em ecossistemas vivos e resilientes através do consórcio com árvores nativas da Mata Atlântica e Cerrado.</p>
+    </section>
+
+    <main>
+        
+        <section id="conceito">
+            <h2 class="section-title">O que é o Consórcio de Café com Nativas?</h2>
+            <div style="background-color: white; padding: 2rem; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.05); margin-bottom: 2rem;">
+                <p style="margin-bottom: 1rem;">O cultivo de café consorciado com árvores nativas (sistema agroflorestal) rompe com o modelo tradicional a pleno sol. As árvores mais altas oferecem sombreamento estratégico para os cafeeiros, criando um microclima ideal que protege a lavoura de extremos climáticos, geadas e secas prolongadas.</p>
+                <p>Espécies como o **Ingá**, a **Aroeira** e o **Louro-pardo** interagem com o solo e com os pés de café, promovendo a ciclagem profunda de nutrientes e reduzindo drasticamente a dependência de fertilizantes químicos sintéticos.</p>
+            </div>
+        </section>
+
+        <section id="beneficios">
+            <h2 class="section-title">Benefícios para a sua Propriedade</h2>
+            <div class="grid-beneficios">
+                <div class="card">
+                    <h3>🌡️ Conforto Térmico</h3>
+                    <p>Redução da temperatura interna da lavoura em até 4°C no verão, diminuindo o estresse hídrico do café.</p>
+                </div>
+                <div class="card">
+                    <h3>🐝 Biodiversidade Ativa</h3>
+                    <p>Atração de polinizadores e predadores naturais (pássaros e insetos), reduzindo a incidência do bicho-mineiro e da broca.</p>
+                </div>
+                <div class="card">
+                    <h3>💧 Conservação da Água</h3>
+                    <p>A matéria orgânica das folhas caídas retém a umidade no solo por muito mais tempo, protegendo contra a erosão.</p>
+                </div>
+                <div class="card">
+                    <h3>☕ Qualidade do Grão</h3>
+                    <p>A maturação mais lenta dos grãos à sombra resulta em uma bebida de maior qualidade, doçura e valor de mercado.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="simulador">
+            <h2 class="section-title">Simulador de Impacto Ecológico</h2>
+            <div class="simulador-box">
+                <p>Clique nos botões abaixo para simular a introdução de árvores nativas na sua lavoura de café e veja a sua pontuação de sustentabilidade subir!</p>
+                
+                <div class="controles">
+                    <button class="btn" onclick="adicionarArvore('Ingá (Fixadora de Nitrogênio)')">🌲 Plantar Ingá</button>
+                    <button class="btn" onclick="adicionarArvore('Aroeira (Atrai Polinizadores)')">🌳 Plantar Aroeira</button>
+                    <button class="btn" onclick="adicionarArvore('Ipê (Madeira Nobre/Sombra)')">🌸 Plantar Ipê</button>
+                    <button class="btn btn-reset" onclick="resetarSimulador()">🔄 Resetar Área</button>
+                </div>
+
+                <div class="resultado-painel">
+                    <div class="resultado-line">Total de Árvores Nativas Introduzidas: <span id="qtd-arvores">0</span></div>
+                    <div class="resultado-line">Nível de Sustentabilidade da Área: <span id="status-area">Monocultura Crítica (0%)</span></div>
+                    <div class="resultado-line">Qualidade Potencial da Bebida (Pontos SCA): <span id="pontos-cafe">75 pontos (Café Comercial)</span></div>
+                    <p style="margin-top: 1rem; font-size: 0.9rem; color: #e0e0e0;" id="historico">Nenhuma árvore plantada ainda. Sua lavoura está exposta ao sol e pragas.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Cultivo Sustentável de Café & Sistemas Agroflorestais. Desenvolvido para um futuro verde.</p>
+    </footer>
+
+    <script>
+        let contagemArvores = 0;
+        let listaArvores = [];
+
+        function adicionarArvore(nomeArvore) {
+            contagemArvores++;
+            listaArvores.push(nomeArvore);
+            
+            // Atualiza o HTML com as informações
+            document.getElementById('qtd-arvores').innerText = contagemArvores;
+            
+            // Lógica de cálculo de sustentabilidade e qualidade do café
+            let porcentagemSustentavel = Math.min(contagemArvores * 10, 100);
+            let notaCafe = Math.min(75 + (contagemArvores * 1.5), 88); // Limita em 88 pontos SCA
+            
+            // Altera o texto de status baseado nos números
+            let statusTexto = "";
+            if (porcentagemSustentavel < 30) {
+                statusTexto = `Transição Inicial (${porcentagemSustentavel}%)`;
+            } else if (porcentagemSustentavel < 70) {
+                statusTexto = `Área em Equilíbrio Agroecológico (${porcentagemSustentavel}%)`;
+            } else {
+                statusTexto = `Ecossistema Sustentável Altamente Resiliente 🎉 (${porcentagemSustentavel}%)`;
+            }
+
+            let tipoCafe = "";
+            if(notaCafe >= 80) {
+                tipoCafe = ` (${notaCafe.toFixed(1)} Pts - Café Especial!)`;
+            } else {
+                tipoCafe = ` (${notaCafe.toFixed(1)} Pts - Café Comercial)`;
+            }
+
+            // Renderiza na tela
+            document.getElementById('status-area').innerText = statusTexto;
+            document.getElementById('pontos-cafe').innerText = tipoCafe;
+            document.getElementById('historico').innerText = `Última árvore plantada: ${nomeArvore}. O solo agradece!`;
+        }
+
+        function resetarSimulador() {
+            contagemArvores = 0;
+            listaArvores = [];
+            document.getElementById('qtd-arvores').innerText = "0";
+            document.getElementById('status-area').innerText = "Monocultura Crítica (0%)";
+            document.getElementById('pontos-cafe').innerText = "75 pontos (Café Comercial)";
+            document.getElementById('historico').innerText = "Nenhuma árvore plantada ainda. Sua lavoura está exposta ao sol e pragas.";
+        }
+    </script>
+</body>
+</html>
